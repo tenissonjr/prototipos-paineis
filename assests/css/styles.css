@@ -1,0 +1,43 @@
+
+:root{
+
+  --heightTabelaAlertasRestricoes : 400px;
+  --heightGraficoTotatizacao      : 260px;
+
+}
+
+
+body {
+  margin: 20px;
+  background-color:#ECEFF1;
+}
+
+
+.tablediv {
+  width: 100%;
+  height: var(--heightTabelaAlertasRestricoes);
+}
+
+
+.chart-wrap{
+  box-shadow:0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+  background-color:white;
+}
+
+
+.chart-head{
+  font-size:20px;
+  padding:10px;
+  color: #053f79;
+  font-weight:700;
+}
+
+.chartdiv {
+  width: 100%;
+  height: var(--heightGraficoTotatizacao);
+}
+
+img {
+  border-radius: 60%;
+  width:60px;
+}
