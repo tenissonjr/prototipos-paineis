@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* NORMALIZE - IGNORE */
+
+body{
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  
+}
+
+
+dashboard {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+
+
+
+/* ===================
+  D A R K  M O D E 
+====================*/
+
+:root {
+  --bg-color: #FFF;
+  --text-color: #000;
+}
+
+dashboard {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+#dark-mode-toggle:checked + dashboard {
+  --bg-color: #26242E;
+  --text-color: #FFF;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+   
+    <input id="dark-mode-toggle" type="checkbox"  style="display: none;">
+    <dashboard>
+        <label class="dark-mode-btn" for="dark-mode-toggle">Alterna modo</label>
+    </dashboard>
+
+</body>
+</html>
+
+
+  
