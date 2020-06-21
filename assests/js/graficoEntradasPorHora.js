@@ -4,33 +4,67 @@
 const graficoEntradasPorHora = (() => {
 
     let chart = null;
-    let options = null;
+    let data = null ;
     let series;
   
-    function getData(entradasPorHora){
+    function getDataTable(){
   
-            var data = new google.visualization.DataTable();
-            data.addColumn('timeofday', 'Hora');
-            data.addColumn('number', 'Registros de entrada');
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('timeofday', 'Hora');
+            dataTable.addColumn('number', 'Registros de entrada');
 
-            data.addRows(entradasPorHora.length);
+            dataTable.addRows(data.length);
             var i=0;
-            entradasPorHora.forEach(e => {
-                data.setCell(i, 0,[ e.date.getHours(),0,0]);
+            data.forEach(e => {
+                dataTable.setCell(i, 0,[ e.date.getHours(),0,0]);
 
-                data.setCell(i, 1, e.value);
+                dataTable.setCell(i, 1, e.value);
                 i++;
              });
-        return data ;
+        return dataTable ;
   
     }
+
+    function getOptionsChart(optionsParam){
+
+      let  options = {
+          height: "100%",
+          width: "100%",
+          vAxis: {
+            minValue: 0,
+            viewWindow: {
+              min: 0,
+            },
+            format: '0'
+            ,textStyle: {color: optionsParam.textColor}
+          },
+          hAxis: {
+            slantedText: false,
+            gridlines: {
+              count: 5
+            }
+            ,textStyle: {color: optionsParam.textColor}
+          },
+          legend: {
+            position: 'none'
+          },
+          colors: optionsParam.colors
+          ,backgroundColor: optionsParam.backgroundColor
+          
+        };
   
-    function initFunction(container, entradasPorHora) {
+        return options;
   
-      if (entradasPorHora == null) {
+      }
+   
+  
+    function initFunction(container, entradasPorHora,optionsParam) {
+  
+      if ( entradasPorHora == undefined) {
         return;
       }
-  
+      data = entradasPorHora ;
+
       google.charts.load('current', {packages: ['corechart']});
       google.charts.setOnLoadCallback(() => {
   
@@ -43,31 +77,38 @@ const graficoEntradasPorHora = (() => {
                   min: [7, 30, 0],
                   max: [22, 30, 0]
                 }
+                ,textStyle: {color: 'red'}
               },
               vAxis: {
                 title: ''
+                ,textStyle: {color: 'red'}
               }
               ,colors: [ '#1c800a']
               ,chartArea: { left: 25, top: 5, width: "90%", height: "90px" }
+              ,backgroundColor: 'transparent'
             };
       
              chart = new google.visualization.LineChart(
               document.getElementById(container)
             );
       
-            chart.draw(getData(entradasPorHora), options);
+            chart.draw(getDataTable(), getOptionsChart(optionsParam));
       });
   
   
     }
   
-    function updateFunction(entradasPorHora) {
+    function updateFunction(entradasPorHora,optionsParam) {
   
       if (chart == null) {
         return;
       }
+      if ( entradasPorHora != undefined) {
+        data=entradasPorHora;
+      }
+
     
-      chart.draw(getData(entradasPorHora), options);
+      chart.draw(getDataTable(), getOptionsChart(optionsParam));
     }
   
     return {

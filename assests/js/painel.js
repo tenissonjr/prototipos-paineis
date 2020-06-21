@@ -309,53 +309,57 @@ const painel = (() => {
 
 
 
-  init();
 
-  function atualizarDados() {
+
+  function initFunction(options) {
+
     entradasRecentes = sivisService.entradasRecentes(dataInicial, dataFinal);
     estatisticas = sivisService.estatisticasEntradas(dataInicial, dataFinal);
 
+    graficoTotalEntradas.init("chartdiv3", estatisticas.entradasPorTipo,options);
+    graficoConvidadosPorRestricao.init("chartdiv5", estatisticas.convidadosPorRestricao,options);    
+    graficoEntradasPorDestino.init("chartdiv4", estatisticas.entradasPorDestino,options);
+    graficoEntradasPorHora.init("chartdiv", estatisticas.entradasPorHora,options);
+    graficoEntradasPorLocal.init("chartdiv2", estatisticas.entradasPorPortaria,options);
+ 
 
-
-  }
-
-
-
-  function init() {
-
-    atualizarDados();
+    //Para migracao de options
 
     tabelaRestricoesAlertas.init("tabEntradas", entradasRecentes);
-    graficoEntradasPorHora.init("chartdiv", estatisticas.entradasPorHora);
-    graficoEntradasPorPortaria.init("chartdiv2", estatisticas.entradasPorPortaria);
-    graficoEntradasPorDestino.init("chartdiv4", estatisticas.entradasPorDestino);
-    graficoConvidadosPorRestricao.init("chartdiv5", estatisticas.convidadosPorRestricao);    
-
-    graficoTotalEntradas.init("chartdiv3", estatisticas.totalEntradas, estatisticas.entradasPorTipo);
-
+  
+    
     
   }
 
 
-  function refreshFunction() {
+  function updateFunction(options) {
 
-    atualizarDados();
+     entradasRecentes = sivisService.entradasRecentes(dataInicial, dataFinal);
+     estatisticas = sivisService.estatisticasEntradas(dataInicial, dataFinal);
+
+
+     graficoTotalEntradas.update(estatisticas.entradasPorTipo,options);     
+     graficoConvidadosPorRestricao.update(estatisticas.convidadosPorRestricao,options);    
+     graficoEntradasPorDestino.update(estatisticas.entradasPorDestino,options);   
+     graficoEntradasPorHora.update(estatisticas.entradasPorHora,options);  
+     graficoEntradasPorLocal.update(estatisticas.entradasPorPortaria,options);   
+  
+//Para migracao de options   
 
     tabelaRestricoesAlertas.update(entradasRecentes);
+  
+  
 
+   
 
-
-    graficoEntradasPorHora.update(estatisticas.entradasPorHora);
-    graficoEntradasPorPortaria.update(estatisticas.entradasPorPortaria);
-    graficoEntradasPorDestino.update(estatisticas.entradasPorDestino);
-    graficoConvidadosPorRestricao.init(estatisticas.convidadosPorRestricao);    
-    graficoTotalEntradas.update(estatisticas.totalEntradas, estatisticas.entradasPorTipo);
 
 
   }
 
+
   return {
-    refresh: refreshFunction
+    init : initFunction
+    ,update: updateFunction
 
   }
 
@@ -363,10 +367,42 @@ const painel = (() => {
 })()
 
 
+function getOptions(){
+
+  let  optionsParam
+
+  let style = window.getComputedStyle(document.documentElement) ;
+
+  let checkDarkMode = document.querySelector('#dark-mode-toggle');
+
+  if(checkDarkMode.checked){
+      optionsParam= {
+          backgroundColor: 'transparent'
+          ,textColor      :style.getPropertyValue('--color-text-dark')
+          ,colors         :[style.getPropertyValue('--color1-dark'),style.getPropertyValue('--color2-dark'),style.getPropertyValue('--color3-dark'),style.getPropertyValue('--color4-dark')]
+          ,colorsAlerts   : [style.getPropertyValue('--color-alert1-dark'),style.getPropertyValue('--color-alert2-dark'),style.getPropertyValue('--color-alert3-dark')]
+      }
+  }else{
+    optionsParam= {
+      backgroundColor: 'transparent'
+      ,textColor      :style.getPropertyValue('--color-text-ligth')
+      ,colors         :[style.getPropertyValue('--color1-ligth'),style.getPropertyValue('--color2-ligth'),style.getPropertyValue('--color3-ligth'),style.getPropertyValue('--color4-ligth')]
+      ,colorsAlerts   : [style.getPropertyValue('--color-alert1-ligth'),style.getPropertyValue('--color-alert2-ligth'),style.getPropertyValue('--color-alert3-ligth')]
+  }
+
+  }
+  return optionsParam
+
+}
+
+
+
+
+
 
 function adicionarVisitantePainel() {
   sivisService.adicionaNovoVisitante();
-  painel.refresh();
+  painel.update(getOptions());
 }
 
 
@@ -384,3 +420,26 @@ setInterval(() => {
 
 }, 1000 * 5
 );
+
+const root = document.documentElement
+
+document.addEventListener('DOMContentLoaded', function() {
+  let  btnDarkMode = document.querySelector('#dark-mode-toggle');
+  btnDarkMode.addEventListener('change', () => {
+
+    const body = document.querySelector('#body');
+    body.classList.toggle("tema-dark");
+
+     var x = document.querySelectorAll(".chart-tema-light");
+     var i;
+     for (i = 0; i < x.length; i++) {
+       x[i].classList.toggle("chart-tema-dark")
+     }
+
+     painel.update(getOptions());
+  
+  });
+  
+});
+
+painel.init(getOptions());

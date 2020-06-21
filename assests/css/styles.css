@@ -1,15 +1,62 @@
-
-:root{
-
+:root {
+ 
   --heightTabelaAlertasRestricoes : 400px;
   --heightGraficoTotatizacao      : 260px;
 
+
+  --background-color-ligth  :#ECEFF1;
+  --chart-background-color-ligth  :white;
+  --color-header-ligth  :#053f79;
+  --color-text-ligth    :black;
+
+  --color4-ligth        :#c8e6c9;
+  --color3-ligth        :#86bd82;
+  --color1-ligth        :#43a047;
+  --color2-ligth        :#1c800a;
+
+  --color-alert1-ligth  :#00C851;
+  --color-alert2-ligth  :#ffbb33;
+  --color-alert3-ligth  :#ff4444;
+
+
+  --background-color-dark  :black;
+  --chart-background-color-dark  :#222222;
+  --color-header-dark   :#bdbdbd;
+  --color-text-dark     :#bdbdbd;  
+
+  --color4-dark         :#c8e6c9;
+  --color3-dark         :#86bd82;
+  --color1-dark         :#43a047;
+  --color2-dark         :#1c800a;
+
+  --color-alert1-dark   :#00C851;
+  --color-alert2-dark   :#ffbb33;
+  --color-alert3-dark   :#ff4444;
+
+
+  --bg-color-light                : #ECEFF1;
+  --bg-color-dark                 : #26242E;
+  --text-dark  :#bdbdbd;
+}
+
+.tema-ligth {
+   width: 100%;
+   height: 100vh;  
+   background-color:var(--background-color-ligth);
+}
+
+.tema-dark {
+  width: 100%;
+  height: 100vh;  
+  background-color:var(--background-color-dark);
 }
 
 
-body {
-  margin: 20px;
-  background-color:#ECEFF1;
+.chart{
+  border-top     : 1px solid #bdbdbd;
+	border-bottom  : 1px solid #bdbdbd;
+	border-right   : 1px solid #bdbdbd;
+	border-left    : 1px solid #bdbdbd;
 }
 
 
@@ -18,18 +65,23 @@ body {
   height: var(--heightTabelaAlertasRestricoes);
 }
 
-
-.chart-wrap{
+.chart-tema-light{
   box-shadow:0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
-  background-color:white;
+  background-color:var(--chart-background-color-ligth);
+  color: var(--color-header-ligth);
+}
+
+.chart-tema-dark{
+  box-shadow:0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+  background-color:var(--chart-background-color-dark);
+  color: var(--color-header-dark);
 }
 
 
 .chart-head{
   font-size:20px;
-  padding:10px;
-  color: #053f79;
-  font-weight:700;
+  padding:8px;
+  font-weight:600;
 }
 
 .chartdiv {

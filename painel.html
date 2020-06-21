@@ -1,103 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Painel</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
 
-    <script src="https://www.amcharts.com/lib/4/core.js"></script>
-    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
- 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script src="https://www.amcharts.com/lib/4/core.js"></script>
+   <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+   <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
 
-    <link rel="stylesheet" href="assests/css/styles.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+   <link rel="stylesheet" href="assests/css/styles.css">
 
 </head>
-<body>
-    <button id="add-to-list">Adicionar visitante </button>   
-    <div class="tools-dashborad">
-    <div class="container-fluid">
-    <div class="row" style="display:">
-       <div class="col-sm-4">
-        <div class="container-fluid">	
-            <div class="row">
-              <div class="chart-wrap">
-                 <h3 class="chart-head">Total de Visitantes</h3>
-                 <div id="chartdiv3" class="tablediv"></div>
-              </div>
+
+<body id="body" class='tema-ligth'>
+   <input id="dark-mode-toggle" type="checkbox"  style="display: none;">
+   <div id="dashboard" >
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12">
+               <button id="add-to-list">Adicionar visitante </button>
+               <label class="dark-mode-btn" for="dark-mode-toggle">Alterna modo</label>
             </div>
-        </div>
-       </div>
-       <div class="col-sm-8">
-          <div class="chart-wrap">
-             <h3 class="chart-head">Restrições e Alertas</h3>
-             <div  class="tablediv">
-                <table id="tabEntradas" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-                   <thead>
-                      <tr>
-                         <th>id</th>
-                         <th>Hora</th>
-                         <th>Foto</th>
-                         <th>Nome</th>
-                         <th>Portaria</th>
-                         <th>Tipo</th>
-                      </tr>
-                   </thead>
-                </table>
-             </div>
-          </div>
-       </div>
-    </div>
-    <div class="row">
-       <div class="col-sm-3">
-          <div class="chart-wrap">
-             <h3 class="chart-head">Total de Visitantes por hora</h3>
-             <div id="chartdiv" class="chartdiv"></div>
-          </div>
-       </div>
-       <div class="col-sm-3">
-          <div class="chart-wrap">
-             <h3 class="chart-head">Total de Visitantes por local</h3>
-             <div id="chartdiv2" class="chartdiv"></div>
-          </div>
-       </div>
-       <div class="col-sm-3">
-          <div class="chart-wrap">
-             <h3 class="chart-head">Total de Visitantes por destino</h3>
-             <div id="chartdiv4" class="chartdiv"></div>
-          </div>
-       </div>
-       <div class="col-sm-3">
-          <div class="chart-wrap">
-             <h3 class="chart-head">Convidados agendados</h3>
-             <div id="chartdiv5" class="chartdiv"></div>
-          </div>
-       </div>  
-    </div>  
+         </div>
+      </div>   
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-4">
+               <div class="container-fluid">
+                  <div class="row">
+                     <div class="chart  chart-tema-light">
+                        <h3 class="chart-head">Total de Visitantes</h3>
+                        <div id="chartdiv3" class="tablediv"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-8">
+               <div class="chart  chart-tema-light">
+                  <h3 class="chart-head">Restrições e Alertas</h3>
+                  <div class="tablediv">
+                     <table id="tabEntradas" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                           <tr>
+                              <th>id</th>
+                              <th>Hora</th>
+                              <th>Foto</th>
+                              <th>Nome</th>
+                              <th>Portaria</th>
+                              <th>Tipo</th>
+                           </tr>
+                        </thead>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12" class="divisao">
+            &ThinSpace;
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-3">
+               <div class="chart  chart-tema-light">
+                  <h3 class="chart-head">Total de Visitantes por hora</h3>
+                  <div id="chartdiv" class="chartdiv chart-tema-light"></div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+               <div class="chart  chart-tema-light">
+                  <h3 class="chart-head">Total de Visitantes por local</h3>
+                  <div id="chartdiv2" class="chartdiv"></div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+               <div class="chart  chart-tema-light">
+                  <h3 class="chart-head">Total de Visitantes por destino</h3>
+                  <div id="chartdiv4" class="chartdiv"></div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+               <div class="chart  chart-tema-light">
+                  <h3 class="chart-head">Convidados agendados</h3>
+                  <div id="chartdiv5" class="chartdiv"></div>
+               </div>
+            </div>
+         </div>
+      </div>
 </body>
 
 <script src="assests/js/graficoTotalEntradas.js"></script>
 <script src="assests/js/graficoEntradasPorHora.js"></script>
-<script src="assests/js/graficoEntradasPorPortaria.js"></script>
+<script src="assests/js/graficoEntradasPorLocal.js"></script>
 <script src="assests/js/graficoEntradasPorDestino.js"></script>
 <script src="assests/js/graficoConvidadosPorRestricao.js"></script>
 <script src="assests/js/tabelaRestricoesAlertas.js"></script>
 <script src="assests/js/painel.js"></script>
+
 </html>

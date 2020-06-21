@@ -4,24 +4,41 @@
 const graficoConvidadosPorRestricao = (() => {
 
     let chart = null;
+    let data = null ;
     let label = null;
     let options = null;
   
-    function getData(convidadosPorRestricao) {
+    function getDataTable() {
   
       var valores = new Array();
       valores.push(new Array("Tipo", "Total"))
-        convidadosPorRestricao.forEach(e =>
+         data.forEach(e =>
             valores.push(new Array(e.tipo, e.total))
          );
-      return valores;
+      return google.visualization.arrayToDataTable(valores);
   
     }
   
+    function getOptionsChart(optionsParam){
+
+      let options = {
+        width: '100%',
+        pieHole: 0.6,
+        colors: optionsParam.colorsAlerts,
+        pieSliceText: ['none'],
+        chartArea: { left: 1, top: 1, width: "100%", height: "150px" }
+        ,legend: {position: 'bottom' , textStyle: {color: optionsParam.textColor}}
+        ,backgroundColor: optionsParam.backgroundColor
+      };
+    
+        return options ;
+
+    }
   
-    function initFunction(container, convidadosPorRestricao) {
+    function initFunction(container, convidadosPorRestricao,optionsParam) {
   
-  
+      data= convidadosPorRestricao
+      
       if ( convidadosPorRestricao == undefined) {
         return;
       }
@@ -29,20 +46,12 @@ const graficoConvidadosPorRestricao = (() => {
 
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback( () => {
-            options = {
-              width: '100%',
-              pieHole: 0.6,
-              colors: ['#00C851', '#ffbb33', '#ff4444'],
-              pieSliceText: ['none'],
-              chartArea: { left: 1, top: 1, width: "100%", height: "150px" }
-              ,legend: {position: 'bottom'}
-            };
-          
+
             chart = new google.visualization.PieChart(
               document.getElementById(container)
             );
   
-            chart.draw(google.visualization.arrayToDataTable(getData(convidadosPorRestricao)), options);
+            chart.draw(getDataTable(), getOptionsChart(optionsParam));
         });
   
     }
@@ -50,12 +59,18 @@ const graficoConvidadosPorRestricao = (() => {
   
   
   
-    function updateFunction(totalEntradas, convidadosPorRestricao) {
+    function updateFunction ( convidadosPorRestricao,optionsParam) {
   
+      if ( convidadosPorRestricao != undefined) {
+        data = convidadosPorRestricao 
+      }
+
+
+
       if (chart == null) {
         return;
       }
-      chart.draw(google.visualization.arrayToDataTable(getData(convidadosPorRestricao)), options);
+      chart.draw(getDataTable(), getOptionsChart(optionsParam));
     }
   
     return {

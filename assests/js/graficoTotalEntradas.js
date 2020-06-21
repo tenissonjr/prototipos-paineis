@@ -4,45 +4,54 @@
 const graficoTotalEntradas = (() => {
 
     let chart = null;
+    let data = null ;
     let label = null;
     let options = null;
   
-    function getData(entradasPorTipo) {
+    function getDataTable() {
   
       var valores = new Array();
       valores.push(new Array("Tipo", "Quantidade"))
-      entradasPorTipo.forEach(e =>
+      data.forEach(e =>
         valores.push(new Array(e.tipo, e.total))
       );
-      return valores;
+      return google.visualization.arrayToDataTable(valores);
   
     }
   
+   function getOptionsChart(optionsParam){
+      let   options = {
+                
+          width: '50px',
+          pieHole: 0.6,
+          colors: optionsParam.colors,
+          pieSliceText: ['none'],
+          chartArea: { left: 1, top: 1, width: "100%", height: "100px" }
+          ,legend: {position: 'bottom' , textStyle: {color: optionsParam.textColor}}
+          ,backgroundColor: optionsParam.backgroundColor
+          
+        };
+        return options
+
+   }
+
+
+    function initFunction(container, entradasPorTipo,optionsParam) {
   
-    function initFunction(container, totalEntradas, entradasPorTipo) {
   
   
-      if (totalEntradas == undefined || entradasPorTipo == undefined) {
+      if ( entradasPorTipo == undefined) {
         return;
       }
-  
+      data = entradasPorTipo 
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback( () => {
-            options = {
-            
-              width: '50px',
-              pieHole: 0.6,
-              colors: ['#c8e6c9', '#86bd82', '#43a047', '#1c800a'],
-              pieSliceText: ['none'],
-              chartArea: { left: 1, top: 1, width: "100%", height: "100px" }
-              ,legend: {position: 'bottom'}
-            };
           
             chart = new google.visualization.PieChart(
               document.getElementById(container)
             );
   
-            chart.draw(google.visualization.arrayToDataTable(getData(entradasPorTipo)), options);
+            chart.draw(getDataTable(), getOptionsChart(optionsParam));
         });
   
     }
@@ -50,12 +59,16 @@ const graficoTotalEntradas = (() => {
   
   
   
-    function updateFunction(totalEntradas, entradasPorTipo) {
+    function updateFunction(entradasPorTipo,optionsParam) {
   
       if (chart == null) {
         return;
       }
-      chart.draw(google.visualization.arrayToDataTable(getData(entradasPorTipo)), options);
+      if ( entradasPorTipo != undefined) {
+        data = entradasPorTipo       
+      }
+      
+      chart.draw(getDataTable(), getOptionsChart(optionsParam));
     }
   
     return {

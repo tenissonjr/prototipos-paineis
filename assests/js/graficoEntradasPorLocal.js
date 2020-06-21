@@ -1,17 +1,19 @@
 //-------------------------------------------------------------
 // Gráfico de Total de Entradas por portaria
 //-------------------------------------------------------------
-const graficoEntradasPorDestino = (() => {
+const graficoEntradasPorLocal = (() => {
 
     let chart = null;
     let data = null ;
 
+
     function getDataTable(){
   
-      var dataTable = new google.visualization.DataTable();    
+      var dataTable = new google.visualization.DataTable();
+          
       dataTable.addColumn({
         type: 'string',
-        label: 'Destino'
+        label: 'Local'
       });
       dataTable.addColumn({
         type: 'number',
@@ -21,7 +23,7 @@ const graficoEntradasPorDestino = (() => {
       dataTable.addRows(data.length);
       var i=0;  
       data.forEach(e => {
-          dataTable.setCell(i, 0,e.destino);
+          dataTable.setCell(i, 0,e.portaria);
           dataTable.setCell(i, 1, e.entradas);
           i++;
      });
@@ -30,8 +32,8 @@ const graficoEntradasPorDestino = (() => {
 
 }
     function getOptionsChart(optionsParam){
-
-    let  options = {
+     
+      let  options = {
         height: "100%",
         width: "100%",
         vAxis: {
@@ -54,46 +56,38 @@ const graficoEntradasPorDestino = (() => {
         },
         colors: optionsParam.colors
         ,backgroundColor: optionsParam.backgroundColor
-        
       };
 
-      return options;
 
+      return options ;
     }
 
 
-
-    function initFunction(container, entradasPorDestino,optionsParam) {
+    function initFunction(container, entradasPorLocal,optionsParam) {
   
-          if ( entradasPorDestino == undefined) {
+          if ( entradasPorLocal == undefined) {
             return;
           }
-         
-          data  = entradasPorDestino
 
+          data =  entradasPorLocal ;  
           google.charts.load('current', {
             packages: ['corechart']
           });
           google.charts.setOnLoadCallback( () => {
-          
-        
             chart = new google.visualization.ColumnChart(document.getElementById(container));
             chart.draw(getDataTable(), getOptionsChart(optionsParam));
           });
           
-          
-
   
     }
   
-    function updateFunction(entradasPorDestino,optionsParam) {
+    function updateFunction(entradasPorLocal,optionsParam) {
   
       if (chart == null) {
         return;
       }
-  
-      if ( entradasPorDestino != undefined) {
-        data = entradasPorDestino;
+      if ( entradasPorLocal != undefined) {
+        data =  entradasPorLocal ;  
       }
 
       chart.draw(getDataTable(), getOptionsChart(optionsParam));
