@@ -85,7 +85,7 @@ function descartarExibicaoVisitante(n) {
   
       if (descartarExibicaoVisitante(entradaTO.id)) {
   
-        return;
+        //return;
       }
   
   
@@ -107,16 +107,11 @@ function descartarExibicaoVisitante(n) {
       }
   
       let rowNode = table
-  
-    
-  
-        .row.add([entradaTO.id, entradaTO.dataHoraVisita, entradaTO.fotoVisitante, entradaTO.nomeVisitante, entradaTO.portaria, entradaTO.tipoRestricao])
-        .draw()
-        .node()
-  
-        ;
-  
-
+      
+      .row.add([entradaTO.id, entradaTO.dataHora, entradaTO.foto, entradaTO.nome, entradaTO.portaria, entradaTO.tipoRestricao])
+      .draw()
+      .node()
+      ;
 
       $(rowNode).css({ opacity: "0.0" });
       if (entradaTO.tipoRestricao == "Alerta") {

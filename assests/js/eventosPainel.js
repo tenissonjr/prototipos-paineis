@@ -20,3 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 });
+
+
+const btnAdicionarVisitante = document.querySelector('#btnAdicionarVisitante');
+btnAdicionarVisitante.addEventListener('click', () => {
+  sivisService.adicionarVisitante();
+  painel.update(getPadraoCores());
+});
+
+
+const btnAdicionarTentativaEntrada = document.querySelector('#btnAdicionarTentativaEntrada');
+btnAdicionarTentativaEntrada.addEventListener('click', () => {
+  sivisService.adicionarTentativaEntrada();
+  painel.update(getPadraoCores());
+});

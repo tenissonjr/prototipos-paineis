@@ -14,31 +14,30 @@ const painel = (() => {
 
   function initFunction(padraoCores) {
 
-    entradasRecentes = sivisService.entradasRecentes(dataInicial, dataFinal);
-    estatisticas = sivisService.estatisticasEntradas(dataInicial, dataFinal);
+    totatilzadorEntradasTO = sivisService.getTotatilzadorEntradasTO(dataInicial, dataFinal)
+    tentativasEntradas     = sivisService.getTentativasEntradas(dataInicial, dataFinal)
 
-    graficoTotalEntradas.init("chartdiv3", estatisticas.entradasPorTipo,padraoCores);
-    graficoConvidadosPorRestricao.init("chartdiv5", estatisticas.convidadosPorRestricao,padraoCores);    
-    graficoEntradasPorDestino.init("chartdiv4", estatisticas.entradasPorDestino,padraoCores);
-    graficoEntradasPorHora.init("chartdiv", estatisticas.entradasPorHora,padraoCores);
-    graficoEntradasPorLocal.init("chartdiv2", estatisticas.entradasPorPortaria,padraoCores);
-    tabelaRestricoesAlertas.init("tabEntradas", entradasRecentes,padraoCores);
+    graficoTotalEntradas.init("chartdiv3", totatilzadorEntradasTO.entradasPorTipo,padraoCores);
+    graficoConvidadosPorRestricao.init("chartdiv5", totatilzadorEntradasTO.convidadosPorRestricao,padraoCores);    
+    graficoEntradasPorDestino.init("chartdiv4", totatilzadorEntradasTO.entradasPorDestino,padraoCores);
+    graficoEntradasPorHora.init("chartdiv", totatilzadorEntradasTO.entradasPorHora,padraoCores);
+    graficoEntradasPorLocal.init("chartdiv2", totatilzadorEntradasTO.entradasPorPortaria,padraoCores);
+    tabelaRestricoesAlertas.init("tabEntradas", tentativasEntradas,padraoCores);
     
   }
 
 
   function updateFunction(padraoCores) {
 
-     entradasRecentes = sivisService.entradasRecentes(dataInicial, dataFinal);
-     estatisticas = sivisService.estatisticasEntradas(dataInicial, dataFinal);
+    totatilzadorEntradasTO = sivisService.getTotatilzadorEntradasTO(dataInicial, dataFinal)
+    tentativasEntradas     = sivisService.getTentativasEntradas(dataInicial, dataFinal)
 
-
-     graficoTotalEntradas.update(estatisticas.entradasPorTipo,padraoCores);     
-     graficoConvidadosPorRestricao.update(estatisticas.convidadosPorRestricao,padraoCores);    
-     graficoEntradasPorDestino.update(estatisticas.entradasPorDestino,padraoCores);   
-     graficoEntradasPorHora.update(estatisticas.entradasPorHora,padraoCores);  
-     graficoEntradasPorLocal.update(estatisticas.entradasPorPortaria,padraoCores);   
-     tabelaRestricoesAlertas.update(entradasRecentes,padraoCores);
+     graficoTotalEntradas.update(totatilzadorEntradasTO.entradasPorTipo,padraoCores);     
+     graficoConvidadosPorRestricao.update(totatilzadorEntradasTO.convidadosPorRestricao,padraoCores);    
+     graficoEntradasPorDestino.update(totatilzadorEntradasTO.entradasPorDestino,padraoCores);   
+     graficoEntradasPorHora.update(totatilzadorEntradasTO.entradasPorHora,padraoCores);  
+     graficoEntradasPorLocal.update(totatilzadorEntradasTO.entradasPorPortaria,padraoCores);   
+     tabelaRestricoesAlertas.update(tentativasEntradas,padraoCores);
 
   }
 
@@ -90,24 +89,9 @@ function getPadraoCores(){
 }
 
 
-
-function adicionarVisitantePainel() {
-  sivisService.adicionaNovoVisitante();
-  painel.update(getPadraoCores());
-}
-
-
 painel.init(getPadraoCores());
-
-
 setInterval(() => {
-    adicionarVisitantePainel();
-
+    painel.update(getPadraoCores());
   }, 1000 * 5
 );
 
-const btn = document.querySelector('#add-to-list');
-btn.addEventListener('click', () => {
-  adicionarVisitantePainel();
-
-});
