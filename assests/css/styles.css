@@ -3,11 +3,21 @@
   --heightTabelaAlertasRestricoes : 400px;
   --heightGraficoTotatizacao      : 260px;
 
+/*
+------------------------------
+Variáveis do Tema Light
+------------------------------
+*/
 
-  --background-color-ligth  :#ECEFF1;
+  --background-color-ligth        :#ECEFF1;
   --chart-background-color-ligth  :white;
-  --color-header-ligth  :#053f79;
-  --color-text-ligth    :black;
+  --color-header-ligth            :#053f79;
+  --color-text-ligth              :black;
+
+  --background-pessoa-alerta-ligth    :#fff59d;
+  --color-text-pessoa-alerta-ligth    :black;
+  --background-pessoa-restricao-ligth :#ef9a9a;
+  --color-text-pessoa-restricao-ligth :black;
 
   --color4-ligth        :#c8e6c9;
   --color3-ligth        :#86bd82;
@@ -19,10 +29,24 @@
   --color-alert3-ligth  :#ff4444;
 
 
-  --background-color-dark  :black;
-  --chart-background-color-dark  :#222222;
-  --color-header-dark   :#bdbdbd;
-  --color-text-dark     :#bdbdbd;  
+ 
+/*
+------------------------------
+Variáveis do Tema Dark
+------------------------------
+*/ 
+
+  --background-color-dark         :black;
+  --chart-background-color-dark   :#222222;
+  --color-header-dark             :#bdbdbd;
+  --color-text-dark               :#bdbdbd;  
+
+  --background-pessoa-alerta-dark    :#fff59d;
+  --color-text-pessoa-alerta-dark    :black;
+  --background-pessoa-restricao-dark :#ef9a9a;
+  --color-text-pessoa-restricao-dark :black;
+
+
 
   --color4-dark         :#c8e6c9;
   --color3-dark         :#86bd82;

@@ -25,7 +25,7 @@ const graficoEntradasPorHora = (() => {
   
     }
 
-    function getOptionsChart(optionsParam){
+    function getOptionsChart(padraoCores){
 
       let  options = {
           height: "100%",
@@ -36,20 +36,20 @@ const graficoEntradasPorHora = (() => {
               min: 0,
             },
             format: '0'
-            ,textStyle: {color: optionsParam.textColor}
+            ,textStyle: {color: padraoCores.textColor}
           },
           hAxis: {
             slantedText: false,
             gridlines: {
               count: 5
             }
-            ,textStyle: {color: optionsParam.textColor}
+            ,textStyle: {color: padraoCores.textColor}
           },
           legend: {
             position: 'none'
           },
-          colors: optionsParam.colors
-          ,backgroundColor: optionsParam.backgroundColor
+          colors: padraoCores.colors
+          ,backgroundColor: padraoCores.backgroundColor
           
         };
   
@@ -58,7 +58,7 @@ const graficoEntradasPorHora = (() => {
       }
    
   
-    function initFunction(container, entradasPorHora,optionsParam) {
+    function initFunction(container, entradasPorHora,padraoCores) {
   
       if ( entradasPorHora == undefined) {
         return;
@@ -92,13 +92,13 @@ const graficoEntradasPorHora = (() => {
               document.getElementById(container)
             );
       
-            chart.draw(getDataTable(), getOptionsChart(optionsParam));
+            chart.draw(getDataTable(), getOptionsChart(padraoCores));
       });
   
   
     }
   
-    function updateFunction(entradasPorHora,optionsParam) {
+    function updateFunction(entradasPorHora,padraoCores) {
   
       if (chart == null) {
         return;
@@ -108,7 +108,7 @@ const graficoEntradasPorHora = (() => {
       }
 
     
-      chart.draw(getDataTable(), getOptionsChart(optionsParam));
+      chart.draw(getDataTable(), getOptionsChart(padraoCores));
     }
   
     return {

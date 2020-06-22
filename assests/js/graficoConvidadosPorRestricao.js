@@ -19,23 +19,23 @@ const graficoConvidadosPorRestricao = (() => {
   
     }
   
-    function getOptionsChart(optionsParam){
+    function getOptionsChart(padraoCores){
 
       let options = {
         width: '100%',
         pieHole: 0.6,
-        colors: optionsParam.colorsAlerts,
+        colors: padraoCores.colorsAlerts,
         pieSliceText: ['none'],
         chartArea: { left: 1, top: 1, width: "100%", height: "150px" }
-        ,legend: {position: 'bottom' , textStyle: {color: optionsParam.textColor}}
-        ,backgroundColor: optionsParam.backgroundColor
+        ,legend: {position: 'bottom' , textStyle: {color: padraoCores.textColor}}
+        ,backgroundColor: padraoCores.backgroundColor
       };
     
         return options ;
 
     }
   
-    function initFunction(container, convidadosPorRestricao,optionsParam) {
+    function initFunction(container, convidadosPorRestricao,padraoCores) {
   
       data= convidadosPorRestricao
       
@@ -51,7 +51,7 @@ const graficoConvidadosPorRestricao = (() => {
               document.getElementById(container)
             );
   
-            chart.draw(getDataTable(), getOptionsChart(optionsParam));
+            chart.draw(getDataTable(), getOptionsChart(padraoCores));
         });
   
     }
@@ -59,7 +59,7 @@ const graficoConvidadosPorRestricao = (() => {
   
   
   
-    function updateFunction ( convidadosPorRestricao,optionsParam) {
+    function updateFunction ( convidadosPorRestricao,padraoCores) {
   
       if ( convidadosPorRestricao != undefined) {
         data = convidadosPorRestricao 
@@ -70,7 +70,7 @@ const graficoConvidadosPorRestricao = (() => {
       if (chart == null) {
         return;
       }
-      chart.draw(getDataTable(), getOptionsChart(optionsParam));
+      chart.draw(getDataTable(), getOptionsChart(padraoCores));
     }
   
     return {

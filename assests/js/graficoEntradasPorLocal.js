@@ -31,7 +31,7 @@ const graficoEntradasPorLocal = (() => {
     return dataTable ;
 
 }
-    function getOptionsChart(optionsParam){
+    function getOptionsChart(padraoCores){
      
       let  options = {
         height: "100%",
@@ -42,20 +42,20 @@ const graficoEntradasPorLocal = (() => {
             min: 0,
           },
           format: '0'
-          ,textStyle: {color: optionsParam.textColor}
+          ,textStyle: {color: padraoCores.textColor}
         },
         hAxis: {
           slantedText: false,
           gridlines: {
             count: 5
           }
-          ,textStyle: {color: optionsParam.textColor}
+          ,textStyle: {color: padraoCores.textColor}
         },
         legend: {
           position: 'none'
         },
-        colors: optionsParam.colors
-        ,backgroundColor: optionsParam.backgroundColor
+        colors: padraoCores.colors
+        ,backgroundColor: padraoCores.backgroundColor
       };
 
 
@@ -63,7 +63,7 @@ const graficoEntradasPorLocal = (() => {
     }
 
 
-    function initFunction(container, entradasPorLocal,optionsParam) {
+    function initFunction(container, entradasPorLocal,padraoCores) {
   
           if ( entradasPorLocal == undefined) {
             return;
@@ -75,13 +75,13 @@ const graficoEntradasPorLocal = (() => {
           });
           google.charts.setOnLoadCallback( () => {
             chart = new google.visualization.ColumnChart(document.getElementById(container));
-            chart.draw(getDataTable(), getOptionsChart(optionsParam));
+            chart.draw(getDataTable(), getOptionsChart(padraoCores));
           });
           
   
     }
   
-    function updateFunction(entradasPorLocal,optionsParam) {
+    function updateFunction(entradasPorLocal,padraoCores) {
   
       if (chart == null) {
         return;
@@ -90,7 +90,7 @@ const graficoEntradasPorLocal = (() => {
         data =  entradasPorLocal ;  
       }
 
-      chart.draw(getDataTable(), getOptionsChart(optionsParam));
+      chart.draw(getDataTable(), getOptionsChart(padraoCores));
       
     }
   

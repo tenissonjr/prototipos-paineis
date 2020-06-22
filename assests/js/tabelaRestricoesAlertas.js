@@ -18,14 +18,19 @@ function descartarExibicaoVisitante(n) {
     let maiorIdTabela = -1;
   
     let nomeTabela;
+    let padraoCores;
   
     let qtdMaxLinhas = 999999999;
   
     let qtdLinhas = 0;
+
+    
   
-    function initFunction(nomeTabelaParam, entradas) {
+    function initFunction(nomeTabelaParam, entradas,padraoCoresParam) {
   
       nomeTabela = nomeTabelaParam
+
+      padraoCores= padraoCoresParam
   
       $('#' + nomeTabela).DataTable({
         "scrollY": "320px",
@@ -103,7 +108,7 @@ function descartarExibicaoVisitante(n) {
   
       let rowNode = table
   
-        //$('td', nRow).css('background-color', 'Orange');
+    
   
         .row.add([entradaTO.id, entradaTO.dataHoraVisita, entradaTO.fotoVisitante, entradaTO.nomeVisitante, entradaTO.portaria, entradaTO.tipoRestricao])
         .draw()
@@ -111,12 +116,16 @@ function descartarExibicaoVisitante(n) {
   
         ;
   
+
+
       $(rowNode).css({ opacity: "0.0" });
       if (entradaTO.tipoRestricao == "Alerta") {
-        $(rowNode).css('background-color', '#fff59d');
+        $(rowNode).css('background-color' , padraoCores.backgroundColorPessoaAlerta);
+        $(rowNode).css('color'            , padraoCores.textColorPessoaAlerta);
       }
       if (entradaTO.tipoRestricao == "Restrição") {
-        $(rowNode).css('background-color', '#ef9a9a');
+        $(rowNode).css('background-color', padraoCores.backgroundColorPessoaRestricao);
+        $(rowNode).css('color'            , padraoCores.textColorPessoaRestricao);        
       }
   
       $(rowNode).animate({ opacity: "1" }, 1500);
@@ -124,8 +133,12 @@ function descartarExibicaoVisitante(n) {
   
     }
   
-    function updateFunction(entradas) {
+    function updateFunction(entradas,padraoCoresParam) {
   
+      if (padraoCoresParam != undefined){
+        padraoCores = padraoCoresParam
+      }
+
       entradas.forEach(function (entradaTO) {
   
         add(entradaTO)

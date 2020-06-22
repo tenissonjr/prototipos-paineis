@@ -29,7 +29,7 @@ const graficoEntradasPorDestino = (() => {
     return dataTable ;
 
 }
-    function getOptionsChart(optionsParam){
+    function getOptionsChart(padraoCores){
 
     let  options = {
         height: "100%",
@@ -40,20 +40,20 @@ const graficoEntradasPorDestino = (() => {
             min: 0,
           },
           format: '0'
-          ,textStyle: {color: optionsParam.textColor}
+          ,textStyle: {color: padraoCores.textColor}
         },
         hAxis: {
           slantedText: false,
           gridlines: {
             count: 5
           }
-          ,textStyle: {color: optionsParam.textColor}
+          ,textStyle: {color: padraoCores.textColor}
         },
         legend: {
           position: 'none'
         },
-        colors: optionsParam.colors
-        ,backgroundColor: optionsParam.backgroundColor
+        colors: padraoCores.colors
+        ,backgroundColor: padraoCores.backgroundColor
         
       };
 
@@ -63,7 +63,7 @@ const graficoEntradasPorDestino = (() => {
 
 
 
-    function initFunction(container, entradasPorDestino,optionsParam) {
+    function initFunction(container, entradasPorDestino,padraoCores) {
   
           if ( entradasPorDestino == undefined) {
             return;
@@ -78,7 +78,7 @@ const graficoEntradasPorDestino = (() => {
           
         
             chart = new google.visualization.ColumnChart(document.getElementById(container));
-            chart.draw(getDataTable(), getOptionsChart(optionsParam));
+            chart.draw(getDataTable(), getOptionsChart(padraoCores));
           });
           
           
@@ -86,7 +86,7 @@ const graficoEntradasPorDestino = (() => {
   
     }
   
-    function updateFunction(entradasPorDestino,optionsParam) {
+    function updateFunction(entradasPorDestino,padraoCores) {
   
       if (chart == null) {
         return;
@@ -96,7 +96,7 @@ const graficoEntradasPorDestino = (() => {
         data = entradasPorDestino;
       }
 
-      chart.draw(getDataTable(), getOptionsChart(optionsParam));
+      chart.draw(getDataTable(), getOptionsChart(padraoCores));
       
     }
   

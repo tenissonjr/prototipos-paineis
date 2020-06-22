@@ -19,16 +19,16 @@ const graficoTotalEntradas = (() => {
   
     }
   
-   function getOptionsChart(optionsParam){
+   function getOptionsChart(padraoCores){
       let   options = {
                 
           width: '50px',
           pieHole: 0.6,
-          colors: optionsParam.colors,
+          colors: padraoCores.colors,
           pieSliceText: ['none'],
           chartArea: { left: 1, top: 1, width: "100%", height: "100px" }
-          ,legend: {position: 'bottom' , textStyle: {color: optionsParam.textColor}}
-          ,backgroundColor: optionsParam.backgroundColor
+          ,legend: {position: 'bottom' , textStyle: {color: padraoCores.textColor}}
+          ,backgroundColor: padraoCores.backgroundColor
           
         };
         return options
@@ -36,7 +36,7 @@ const graficoTotalEntradas = (() => {
    }
 
 
-    function initFunction(container, entradasPorTipo,optionsParam) {
+    function initFunction(container, entradasPorTipo,padraoCores) {
   
   
   
@@ -51,7 +51,7 @@ const graficoTotalEntradas = (() => {
               document.getElementById(container)
             );
   
-            chart.draw(getDataTable(), getOptionsChart(optionsParam));
+            chart.draw(getDataTable(), getOptionsChart(padraoCores));
         });
   
     }
@@ -59,7 +59,7 @@ const graficoTotalEntradas = (() => {
   
   
   
-    function updateFunction(entradasPorTipo,optionsParam) {
+    function updateFunction(entradasPorTipo,padraoCores) {
   
       if (chart == null) {
         return;
@@ -68,7 +68,7 @@ const graficoTotalEntradas = (() => {
         data = entradasPorTipo       
       }
       
-      chart.draw(getDataTable(), getOptionsChart(optionsParam));
+      chart.draw(getDataTable(), getOptionsChart(padraoCores));
     }
   
     return {
