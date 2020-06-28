@@ -60,7 +60,11 @@ function getPadraoCores(){
 
   let checkDarkMode = document.querySelector('#dark-mode-toggle');
 
+  const root = document.documentElement;
+
   if(checkDarkMode.checked){
+      root.style.setProperty('--background-color-datatable-odd',style.getPropertyValue('--background-color-datatable-odd-dark'));
+      root.style.setProperty('--background-color-datatable-even',style.getPropertyValue('--background-color-datatable-even-dark'));
       padraoCores= {
           backgroundColor                 :'transparent'
           ,textColor                      :style.getPropertyValue('--color-text-dark')
@@ -72,6 +76,8 @@ function getPadraoCores(){
           ,textColorPessoaRestricao       :style.getPropertyValue('--color-text-pessoa-restricao-dark')            
       }
   }else{
+      root.style.setProperty('--background-color-datatable-odd',style.getPropertyValue('--background-color-datatable-odd-ligth'));
+      root.style.setProperty('--background-color-datatable-even',style.getPropertyValue('--background-color-datatable-even-ligth'));
       padraoCores= {
         backgroundColor                 : 'transparent'
         ,textColor                      :style.getPropertyValue('--color-text-ligth')

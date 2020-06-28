@@ -14,9 +14,9 @@ Variáveis do Tema Light
   --color-header-ligth            :#053f79;
   --color-text-ligth              :black;
 
-  --background-pessoa-alerta-ligth    :#fff59d;
+  --background-pessoa-alerta-ligth    :#f9c851;
   --color-text-pessoa-alerta-ligth    :black;
-  --background-pessoa-restricao-ligth :#ef9a9a;
+  --background-pessoa-restricao-ligth :#ff5b5b;
   --color-text-pessoa-restricao-ligth :black;
 
   --color4-ligth        :#c8e6c9;
@@ -28,8 +28,10 @@ Variáveis do Tema Light
   --color-alert2-ligth  :#ffbb33;
   --color-alert3-ligth  :#ff4444;
 
+  --background-color-datatable-odd-ligth    :white;
+  --background-color-datatable-even-ligth   :#f0f0f0;
 
- 
+  
 /*
 ------------------------------
 Variáveis do Tema Dark
@@ -41,9 +43,9 @@ Variáveis do Tema Dark
   --color-header-dark             :#bdbdbd;
   --color-text-dark               :#bdbdbd;  
 
-  --background-pessoa-alerta-dark    :#fff59d;
+  --background-pessoa-alerta-dark    :#f9c851;
   --color-text-pessoa-alerta-dark    :black;
-  --background-pessoa-restricao-dark :#ef9a9a;
+  --background-pessoa-restricao-dark :#ff5b5b;
   --color-text-pessoa-restricao-dark :black;
 
 
@@ -61,7 +63,19 @@ Variáveis do Tema Dark
   --bg-color-light                : #ECEFF1;
   --bg-color-dark                 : #26242E;
   --text-dark  :#bdbdbd;
+
+  --background-color-datatable-odd-dark    :#222222;
+  --background-color-datatable-even-dark   :#131313;
+
+
+  --background-color-datatable-odd    : var(--background-color-datatable-odd-ligth) ;
+  --background-color-datatable-even   : var(--background-color-datatable-even-ligth) ; 
+  
 }
+
+
+table.dataTable tr.odd { background-color: var(--background-color-datatable-odd); }
+table.dataTable tr.even{ background-color:var(--background-color-datatable-even);  }
 
 .tema-ligth {
    width: 100%;

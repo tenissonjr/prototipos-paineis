@@ -18,9 +18,9 @@ const graficoEntradasPorDestino = (() => {
         label: 'Qtd.Visitantes'
       });
 
-      dataTable.addRows(data.length);
+      dataTable.addRows(data1.length);
       var i=0;  
-      data.forEach(e => {
+      data1.forEach(e => {
           dataTable.setCell(i, 0,e.destino);
           dataTable.setCell(i, 1, e.entradas);
           i++;
@@ -30,6 +30,7 @@ const graficoEntradasPorDestino = (() => {
 
 }
     function getOptionsChart(padraoCores){
+   
 
     let  options = {
         height: "100%",
@@ -69,7 +70,7 @@ const graficoEntradasPorDestino = (() => {
             return;
           }
          
-          data  = entradasPorDestino
+          data1  = entradasPorDestino
 
           google.charts.load('current', {
             packages: ['corechart']
@@ -93,7 +94,7 @@ const graficoEntradasPorDestino = (() => {
       }
   
       if ( entradasPorDestino != undefined) {
-        data = entradasPorDestino;
+        data1 = entradasPorDestino;
       }
 
       chart.draw(getDataTable(), getOptionsChart(padraoCores));

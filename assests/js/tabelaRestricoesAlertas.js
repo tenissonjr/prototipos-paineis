@@ -1,8 +1,4 @@
-function descartarExibicaoVisitante(n) {
-    //return false;
-    return ((n <= 120) || (n % 10 != 0))
-  
-  }
+
   
   /*
    
@@ -40,6 +36,7 @@ function descartarExibicaoVisitante(n) {
         "scrollCollapse": false,
         "paging": false,
   
+   
   
         "columnDefs": [
           {
@@ -49,7 +46,7 @@ function descartarExibicaoVisitante(n) {
   
           },
           {
-            "targets": [1],
+            "targets": [2],
             "orderable": false
             ,
             render: function (data) {
@@ -58,7 +55,7 @@ function descartarExibicaoVisitante(n) {
   
           },
           {
-            "targets": [2],
+            "targets": [3],
             "orderable": false,
             render: function (data) {
               return '<img src="' + data + '">'
@@ -83,10 +80,7 @@ function descartarExibicaoVisitante(n) {
   
     function add(entradaTO) {
   
-      if (descartarExibicaoVisitante(entradaTO.id)) {
-  
-        //return;
-      }
+
   
   
       if (entradaTO.id <= maiorIdTabela) {
@@ -106,21 +100,22 @@ function descartarExibicaoVisitante(n) {
         row.remove();
       }
   
-      let rowNode = table
-      
-      .row.add([entradaTO.id, entradaTO.dataHora, entradaTO.foto, entradaTO.nome, entradaTO.portaria, entradaTO.tipoRestricao])
-      .draw()
-      .node()
+      let newRow = table
+      .row.add([ entradaTO.id,entradaTO.tipoRestricao, entradaTO.dataHora, entradaTO.foto, entradaTO.nome, entradaTO.portaria])
       ;
+
+      console.log(newRow)
+
+      let rowNode = newRow.draw().node() ;
+
+     
 
       $(rowNode).css({ opacity: "0.0" });
       if (entradaTO.tipoRestricao == "Alerta") {
-        $(rowNode).css('background-color' , padraoCores.backgroundColorPessoaAlerta);
-        $(rowNode).css('color'            , padraoCores.textColorPessoaAlerta);
+          $(rowNode).find('td:first').css('border-left' , '30px solid ' + padraoCores.backgroundColorPessoaAlerta);
       }
       if (entradaTO.tipoRestricao == "Restrição") {
-        $(rowNode).css('background-color', padraoCores.backgroundColorPessoaRestricao);
-        $(rowNode).css('color'            , padraoCores.textColorPessoaRestricao);        
+          $(rowNode).find('td:first').css('border-left', '30px solid ' + padraoCores.backgroundColorPessoaRestricao);
       }
   
       $(rowNode).animate({ opacity: "1" }, 1500);
@@ -138,6 +133,7 @@ function descartarExibicaoVisitante(n) {
   
         add(entradaTO)
       });
+
   
     }
   
